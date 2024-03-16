@@ -10,9 +10,7 @@ let tasks = [{
 }]
 let doneTasks = []
 
-if (tasks.length > 0) {
-    renderTaskListsHTML()
-}
+renderTaskListsHTML()
 
 submitBtn.addEventListener('click', () => {
     event.preventDefault()
@@ -91,4 +89,8 @@ function renderTaskListsHTML() {
             </li>
         `
     })
+
+    document.title = tasks.length > 0 ?
+    `To-do List (${tasks.length})` :
+    'To-do List'
 }
