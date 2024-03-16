@@ -2,13 +2,12 @@ const taskInput = document.querySelector('.todo-input')
 const submitBtn = document.querySelector('.todo-form button')
 const todoLists = document.querySelector('.todo-lists')
 const todoDoneLists = document.querySelector('.todo-done-lists')
+const claerAllBtn = document.querySelector('.clear-all-btn')
 
 let tasks = JSON.parse(localStorage.getItem('tasks')) || []
 let doneTasks = JSON.parse(localStorage.getItem('doneTasks')) || []
 
-if (tasks) {
-    renderTaskListsHTML()
-}
+renderTaskListsHTML()
 
 submitBtn.addEventListener('click', () => {
     event.preventDefault()
@@ -26,6 +25,13 @@ submitBtn.addEventListener('click', () => {
     }
 
     taskInput.value = ''
+})
+
+claerAllBtn.addEventListener('click', () => {
+    doneTasks = []
+    saveToStorage()
+
+    renderTaskListsHTML()
 })
 
 function deleteTask() {
@@ -94,6 +100,8 @@ function renderTaskListsHTML() {
     document.title = tasks.length > 0 ?
     `To-do List (${tasks.length})` :
     'To-do List'
+
+    claerAllBtn.style.display = doneTasks.length > 0 ? 'block' : 'none'
 }
 
 function saveToStorage() {

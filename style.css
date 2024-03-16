@@ -89,6 +89,19 @@ body {
     color: grey;
 }
 
+.clear-all-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: rgb(197, 24, 24);
+    text-decoration: underline;
+    display: none;
+}
+
+.clear-all-btn:hover {
+    opacity: 0.7;
+}
+
 .task-name {
     margin-right: auto;
     font-weight: bold;
