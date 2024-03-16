@@ -15,7 +15,7 @@ renderTaskListsHTML()
 submitBtn.addEventListener('click', () => {
     event.preventDefault()
     
-    if (taskInput.value != '') {
+    if (taskInput.value.trim().length > 0) {
         const taskData = {
             name: taskInput.value,
             id: Date.now(),
