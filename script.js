@@ -1,6 +1,7 @@
 const taskInput = document.querySelector('.todo-input')
 const submitBtn = document.querySelector('.todo-form button')
 const todoLists = document.querySelector('.todo-lists')
+const todoDoneLists = document.querySelector('.todo-done-lists')
 
 let tasks = [{
     name: 'Task 1',
@@ -33,14 +34,16 @@ submitBtn.addEventListener('click', () => {
 function deleteTask() {
     const id = event.target.parentElement.dataset.id
     removeFromLists(tasks, id)
+    removeFromLists(doneTasks, id)
 }
 
 function doneTask() {
     const id = event.target.parentElement.dataset.id
+    const allTasks = [...tasks, ...doneTasks]
     
-    tasks.forEach(task => {
+    allTasks.forEach(task => {
         if (task.id == id) {
-            if (task.done = false) {
+            if (task.done == false) {
                 task.done = true
                 doneTasks.push(task)
                 removeFromLists(tasks, id)
@@ -54,16 +57,18 @@ function doneTask() {
 }
 
 function removeFromLists(lists, id) {
-    const newTask = lists.filter(task => {
-        return task.id != id
+    lists.forEach((task, i) => {
+        if (task.id == id) {
+            lists.splice(i, 1)
+        }
     })
 
-    lists = newTask
     renderTaskListsHTML()
 }
 
 function renderTaskListsHTML() {
     todoLists.innerHTML = ''
+    todoDoneLists.innerHTML = ''
 
     tasks.forEach(task => {
         const {name, id} = task
@@ -72,6 +77,17 @@ function renderTaskListsHTML() {
                 <span class="task-name">${name}</span>
                 <button class="delete-btn" onclick="deleteTask()">Delete</button>
                 <input type="checkbox" class="done-btn" onclick="doneTask()">
+            </li>
+        `
+    })
+
+    doneTasks.forEach(task => {
+        const {name, id} = task
+        todoDoneLists.innerHTML += `
+            <li data-id=${id}>
+                <span class="task-name">${name}</span>
+                <button class="delete-btn" onclick="deleteTask()">Delete</button>
+                <input type="checkbox" class="done-btn" onclick="doneTask()" checked>
             </li>
         `
     })

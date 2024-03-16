@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>To-do List</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <script src="script.js" defer></script>
-</head>
-<body>
+  </head>
+  <body>
     <div class="todo-container">
-        <form class="todo-form">
-            <input type="text" class="todo-input" placeholder="Enter Task">
-            <button type="submit">Submit</button>
-        </form>
-        <ul class="todo-lists"></ul>
+      <form class="todo-form">
+        <input type="text" class="todo-input" placeholder="Enter Task" />
+        <button type="submit">Submit</button>
+      </form>
+      <ul class="todo-lists"></ul>
+      <div class="todo-done-lists-container">
+        <div class="todo-done-lists-title">Completed Task</div>
+        <ul class="todo-done-lists"></ul>
+      </div>
     </div>
-</body>
+  </body>
 </html>
