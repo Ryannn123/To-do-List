@@ -3,14 +3,12 @@ const submitBtn = document.querySelector('.todo-form button')
 const todoLists = document.querySelector('.todo-lists')
 const todoDoneLists = document.querySelector('.todo-done-lists')
 
-let tasks = [{
-    name: 'Task 1',
-    id: 123,
-    done: false
-}]
-let doneTasks = []
+let tasks = JSON.parse(localStorage.getItem('tasks')) || []
+let doneTasks = JSON.parse(localStorage.getItem('doneTasks')) || []
 
-renderTaskListsHTML()
+if (tasks) {
+    renderTaskListsHTML()
+}
 
 submitBtn.addEventListener('click', () => {
     event.preventDefault()
@@ -22,6 +20,7 @@ submitBtn.addEventListener('click', () => {
             done: false
         }
         tasks.push(taskData)
+        saveToStorage()
 
         renderTaskListsHTML()
     }
@@ -33,6 +32,7 @@ function deleteTask() {
     const id = event.target.parentElement.dataset.id
     removeFromLists(tasks, id)
     removeFromLists(doneTasks, id)
+    saveToStorage()
 }
 
 function doneTask() {
@@ -52,6 +52,7 @@ function doneTask() {
             }
         }
     })
+    saveToStorage()
 }
 
 function removeFromLists(lists, id) {
@@ -93,4 +94,9 @@ function renderTaskListsHTML() {
     document.title = tasks.length > 0 ?
     `To-do List (${tasks.length})` :
     'To-do List'
+}
+
+function saveToStorage() {
+    localStorage.setItem('tasks', JSON.stringify(tasks))
+    localStorage.setItem('doneTasks', JSON.stringify(doneTasks))
 }
