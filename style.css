@@ -73,6 +73,11 @@ body {
     column-gap: 10px;
 }
 
+.todo-done-lists .task-name {
+    color: grey;
+    text-decoration: line-through;
+}
+
 .todo-done-lists-container {
     margin-top: 40px;
 }
